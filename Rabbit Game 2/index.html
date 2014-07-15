@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="Game">
+    
+<head>
+  <meta charset="utf-8">
+  
+  <title>The white rabbit is late!</title>
+
+<link href='http://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <!-- Firebase -->
+ <link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
+  <script type="text/javascript" src="jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="phaser.min.js"></script>
+  <script type="text/javascript" src="app2.js"></script>
+
+</head>
+
+<body ng-controller="ctrl">
+
+	<h1 id = "settings_header">Sound and Music:</h1>
+	
+	
+	<div id="frame">
+		<div id="frame-holder">
+			<div class="onoffswitch">
+	    <input 
+	    	type="checkbox" 
+	    	name="onoffswitch" 
+	    	class="onoffswitch-checkbox" 
+	    	id="myonoffswitch" 
+	    	ng-click="soundSettings()"
+	    	checked/>
+	</div>
+
+			<div id="menu">
+			<input 
+	    		type='text'
+	    		id='name_input'
+	    		placeholder='Enter Your Name'>
+	    		<span id="play" ng-click="play()">Play!!</span>
+			<div class="high-scores">
+
+		<h1 id="headhigh">Top 5 Scorers:</h1> 
+			<ul>
+				<li ng-repeat="item in list | orderByPriority">{{item.Scorer}}: {{item.Score}} <!-- on {{item.date_time | date : 'dd MMM yyyy'}} at {{item.date_time | date : 'hh:mm:ss a'}} --></li> 		</ul>
+	</div>
+</div>
+	  		<div id="game-div"> </div>
+		</div>
+		<p id="score"></p>
+	</div>
+
+</body>
+
+</html>

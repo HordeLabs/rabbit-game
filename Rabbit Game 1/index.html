@@ -23,8 +23,11 @@
 
 <body ng-controller="ctrl">
 
-	<h1 id = "settings_header">Sound and Music:</h1>
-	<div class="onoffswitch">
+	
+	
+	<div id="frame">
+		<div id="frame-holder">
+			<div class="onoffswitch">
 	    <input 
 	    	type="checkbox" 
 	    	name="onoffswitch" 
@@ -32,14 +35,7 @@
 	    	id="myonoffswitch" 
 	    	ng-click="soundSettings()"
 	    	checked/>
-	    <label class="onoffswitch-label" for="myonoffswitch">
-	        <span class="onoffswitch-inner"></span>
-	        <span class="onoffswitch-switch"></span>
-    	</label>
 	</div>
-	
-	<div id="frame">
-		<div id="frame-holder">
 
 			<div id="menu">
 			<input 

@@ -38,8 +38,8 @@ body{
 	width: 145px;
 	height: 97px;
 	position: absolute;
-	bottom:-110px;
-	left:200px;
+	bottom: 111px;
+	left: -188px;
 	display:block;
 	content: " ";
 	background:url('instruct2.png');
@@ -51,52 +51,26 @@ body{
 	color: white;
 	margin: 0px;
 }
-
-.onoffswitch {
-    position: relative; width: 90px; top: -30px; right: -160px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+.onoffswitch{
+	position: absolute;
+	width: 87px;
+	top: 200px;
+	left: -161px;
+	height: 153px;
+	padding: 0 0 0 10px;
+	-webkit-user-select: none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
-    display: none;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+.onoffswitch-checkbox:before{
+	position: absolute; width: 97px; height: 153px; top:0px; left:0px; background:url('switch.png') no-repeat left top; content:" "; display:block;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
-    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+.onoffswitch-checkbox:checked:after{
+	position: absolute; width: 97px; height: 153px; top:0px; left:0px; background:url('switch.png') no-repeat right top; content:" "; display:block;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "OFF";
-    padding-right: 40px;
-    background-color: #FF0000; color: #FFFFFF;
-    text-align: right;
-}
-.onoffswitch-inner:after {
-    content: "ON";
-    padding-left: 40px;
-    background-color: #4AA02C; color: #FFFFFF;
-}
-.onoffswitch-switch {
-    display: block; width: 18px; margin: 6px;
-    background: #FFFFFF;
-    border: 2px solid #999999; border-radius: 20px;
-    position: absolute; top: 0; bottom: 0; right: 56px;
-    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
-    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+.onoffswitch-checkbox:checked:before{
+	display:none;
 }
 
 canvas{
