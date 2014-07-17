@@ -221,5 +221,6 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
     $(document).keyup(function(e)
     	{
     		if(!alive && e.keyCode == 38) $scope.play();
+    		if(!alive && e.keyCode == 13) $scope.play();
     	});
 }]);
