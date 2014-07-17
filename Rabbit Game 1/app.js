@@ -10,7 +10,7 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 	var game = new Phaser.Game(400, 490, Phaser.AUTO, 'game_div');
 	var audio = new Audio('imlate2.wav');
 	var audio2 = new Audio('music.wav');
-	var alive = true;
+	var alive = false;
 	$scope.playSound = false;
 	$scope.increment = 0;
 	$scope.chooser = 0;
@@ -137,15 +137,20 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 			    // Kill the pipe when it's no longer visible 
 			    pipe.outOfBoundsKill = true;
 
-			    if(this.score > 14 && this.score < 20)
-				{
-					pipe.body.velocity.x = -300;
-				}
+			    if(this.score > 9 && this.score <= 14)
+			    {
+			    	pipe.body.velocity.x = (Math.random() * 200 + 200) * -1;
+			    }
 
-				if(this.score > 20)
-				{
-					pipe.body.velocity.x = -400;
-				} 
+			    if(this.score > 14 && this.score < 20)
+			    {
+				pipe.body.velocity.x = (Math.random() * 300 + 200) * -1;
+			    }
+
+			    if(this.score >= 20)
+			    {
+				pipe.body.velocity.x = (Math.random() * 400 + 200) * -1;
+			    }  
 			},
 
 		add_row_of_pipes: function() 
@@ -211,6 +216,10 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 			$scope.main.$save(p.name());
     	});
     	
-    	
     }
+    
+    $(document).keyup(function(e)
+    	{
+    		if(!alive && e.keyCode == 38) $scope.play();
+    	});
 }]);
