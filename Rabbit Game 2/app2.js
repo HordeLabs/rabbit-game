@@ -137,20 +137,15 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 			    // Kill the pipe when it's no longer visible 
 			    pipe.outOfBoundsKill = true;
 
-			    if(this.score > 9 && this.score <= 14)
+			    if(this.score >= 15 && this.score <= 19)
 			    {
-			    	pipe.body.velocity.x = (Math.random() * 200 + 200) * -1;
-			    }
-
-			    if(this.score > 14 && this.score < 20)
-			    {
-					pipe.body.velocity.x = (Math.random() * 300 + 200) * -1;
+			    	pipe.body.velocity.x = -300;
 			    }
 
 			    if(this.score >= 20)
 			    {
-					pipe.body.velocity.x = (Math.random() * 400 + 200) * -1;
-			    } 
+				pipe.body.velocity.x = -400;
+			    }
 			},
 
 		add_row_of_pipes: function() 
