@@ -1,10 +1,11 @@
 var myApp = angular.module("Game", ["firebase"]);
 
-myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
-	var mainRef = new Firebase("https://high-scores.firebaseio.com/Game2Scores");
-	
-    $scope.main = $firebase(mainRef)
+myApp.controller('ctrl', ['$scope', '$firebase', '$firebaseSimpleLogin', function($scope, $firebaseSimpleLogin, $firebase){
+	var mainRef = new Firebase("https://high-scores.firebaseio.com");
+	$scope.user = null;
+    $scope.main = $firebase(mainRef);
     $scope.list = $firebase(mainRef.limit(5));
+   //$scope.auth = $firebaseSimpleLogin(mainRef);
 
 
 	var game = new Phaser.Game(400, 490, Phaser.AUTO, 'game_div');
@@ -31,7 +32,7 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 
 		    // Laod background image
 		    this.game.load.image('background', 'gamebg.jpg'); 
-
+ 
 		    
 		},
 
@@ -113,7 +114,7 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 					if(this.score != -1)
 					{ 	
 						var name = (name_input == "") ? "Player" : name_input;
-						$scope.addScore(name, this.score);
+						$scope.addScore(this.score);
 				  	}
 				  		
 					this.game.time.events.remove(this.timer); 
@@ -137,20 +138,15 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 			    // Kill the pipe when it's no longer visible 
 			    pipe.outOfBoundsKill = true;
 
-			    if(this.score > 9 && this.score <= 14)
+			    if(this.score >= 15 && this.score <= 19)
 			    {
-			    	pipe.body.velocity.x = (Math.random() * 200 + 200) * -1;
-			    }
-
-			    if(this.score > 14 && this.score < 20)
-			    {
-					pipe.body.velocity.x = (Math.random() * 300 + 200) * -1;
+			    	pipe.body.velocity.x = -300;
 			    }
 
 			    if(this.score >= 20)
 			    {
-					pipe.body.velocity.x = (Math.random() * 400 + 200) * -1;
-			    } 
+				pipe.body.velocity.x = -400;
+			    }
 			},
 
 		add_row_of_pipes: function() 
@@ -197,20 +193,28 @@ myApp.controller('ctrl', ['$scope', '$firebase', function($scope, $firebase){
 		$('#menu').hide();
 		alive = true;
 	};
+
+	$scope.login = function(){
+		//console.log($scope.auth);
+      $scope.main.$login('facebook', {rememberMe: false}).then(function(e){
+        $scope.user = e;
+      });
+    };
 	
 
-    $scope.addScore = function(name, score){
-    	var toAdd = {
-    		Scorer: name,
-    		Score: score,
-    		date_time: new Date().getTime()
+    $scope.addScore = function(score){
+    	if($scope.user != null){
+		  	var toAdd = {
+		  		Scorer: $scope.user,
+		  		Score: score,
+		  		date_time: new Date().getTime()
+		  	}
+        console.log($scope.main);
+		  	$scope.main.$add(toAdd).then(function(p){
+				$scope.main[p.name()].$priority = score;
+				$scope.main.$save(p.name());
+		  	});
     	}
-
-    	$scope.main.$add(toAdd).then(function(p){
-			$scope.main[p.name()].$priority = score;
-			$scope.main.$save(p.name());
-    	});
-    	
     }
     
     $(document).keyup(function(e)
